@@ -1,0 +1,25 @@
+/* menu.css */
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu li {
+    display: inline-block;
+    position: relative;
+    margin-right: 1em;
+}
+
+.menu .submenu ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 0.5em;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+}
+
+.menu .submenu:hover ul {
+    display: block;
+}

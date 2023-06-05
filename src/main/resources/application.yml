@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: 1111
+  devtools:
+    livereload:
+      enabled: true
+  thymeleaf:
+    cache: false
+  profiles:
+    active: default
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+#            42dot에 google api key 요청하여 받아야함
+            client-id: 669734794561-fig3vc1jaur8t7hdjaq5dnsh3lneicgt.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+            scope: openid,email,profile
+  mvc:
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /**
+    hiddenmethod:
+      filter:
+        enabled: true
+  resources:
+    add-mappings: false
+    static-locations: classpath:/static/
+
+logging:
+  level:
+    com.dot.mapper: DEBUG
+
+mybatis:
+  type-aliases-package: com.dot.domain
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

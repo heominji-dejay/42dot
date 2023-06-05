@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Main Home</title>
+  <script type="text/javascript">
+    function deleteConfirm() {
+      return confirm("정말로 삭제하시겠습니까?");
+    }
+    function openAddContentForm() {
+      var popup = window.open("", "AddContentPopup", "width=400,height=400");
+
+      var contentForm = "<h2>콘텐츠 추가</h2>" +
+                        "<form>" +
+                        "<label for='contentName'>콘텐츠 명:</label>" +
+                        "<input type='text' id='contentName' name='contentName'><br><br>" +
+                        "<label for='contentType'>콘텐츠 유형:</label>" +
+                        "<input type='text' id='contentType' name='contentType'><br><br>" +
+                        "<label for='contentText'>콘텐츠 내 텍스트:</label>" +
+                        "<input type='text' id='contentText' name='contentText'><br><br>" +
+                        "<label for='displayStatus'>노출 여부:</label>" +
+                        "<input type='text' id='displayStatus' name='displayStatus'><br><br>" +
+                        "<label for='upload'>업로드 파일 경로:</label>" +
+                        "<input type='text' id='upload' name='upload'><br><br>" +
+                        "<input type='button' value='추가' onclick='addContent()'>" +
+                        "</form>";
+
+      popup.document.write(contentForm);
+    }
+
+    function addContent() {
+      var contentName = window.opener.document.getElementById("contentName").value;
+      var contentType = window.opener.document.getElementById("contentType").value;
+      var contentText = window.opener.document.getElementById("contentText").value;
+      var displayStatus = window.opener.document.getElementById("displayStatus").value;
+      var upload = window.opener.document.getElementById("upload").value;
+
+      // 입력된 값들을 처리하는 추가적인 로직을 작성합니다.
+      console.log("콘텐츠 명: " + contentName);
+      console.log("콘텐츠 유형: " + contentType);
+      console.log("콘텐츠 내 텍스트: " + contentText);
+      console.log("노출 여부: " + displayStatus);
+      console.log("업로드 파일 경로: " + upload);
+
+      // 팝업 창을 닫습니다.
+      window.close();
+    }
+    function selectAll(box) {
+      var checkboxes = document.getElementsByName('contentId');
+      for (var i in checkboxes) {
+        checkboxes[i].checked = box.checked;
+      }
+    }
+  </script>
+</head>
+<body>
+<div th:replace="~{fragments/layout}"></div>
+<div class="content-container">
+
+<h1>Main Home</h1>
+
+<form th:action="@{/admin/content/{id}(id=${content.contentId})}" method="post" onsubmit="return deleteConfirm()">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Delete</button>
+</form>
+
+<button type="button" onclick="openAddContentForm()">Add Content</button>
+
+<table>
+  <tr>
+    <!-- 테이블 헤더를 설정합니다. -->
+    <th><input type="checkbox" onclick="selectAll(this)"></th>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Text</th>
+    <th>Display</th>
+    <th>Remarks</th>
+    <th>Created Date</th>
+    <th>Modified Date</th>
+    <th>Actions</th>
+  </tr>
+  <tr th:each="content : ${contentList}">
+    <!-- 테이블 셀을 설정합니다. -->
+    <td><input type="checkbox" name="contentId" value="${content.contentId}"></td>
+    <td th:text="${content.contentName}"></td>
+    <td th:text="${content.contentType}"></td>
+    <td th:text="${content.contentText}"></td>
+    <td><input type="checkbox" name="displayStatus" value="${content.displayStatus}">노출</td>
+    <td th:text="${content.remarks}"></td>
+    <td th:text="${content.createdDate}"></td>
+    <td th:text="${content.modifiedDate}"></td>
+    <td>
+      <!-- 각 콘텐츠에 대해 삭제 및 수정 버튼을 추가합니다. -->
+      <form th:action="@{/admin/content/{id}(id=${content.contentId})}" th:method="get">
+        <button type="submit">Edit</button>
+      </form>
+      <form th:action="@{/admin/content/{id}(id=${content.contentId})}" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>
+

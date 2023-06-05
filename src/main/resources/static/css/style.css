@@ -1,0 +1,117 @@
+/* body */
+body {
+  margin: 0;
+  background-color: #f2f2f2;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* 상단 메뉴 */
+.menu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  display: inline-block;
+  position: relative;
+  margin-right: 40px;
+}
+
+.menu li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu li:hover ul {
+  display: block;
+}
+
+.menu li ul li {
+  display: block;
+}
+
+/* 좌측 메뉴 */
+.left-menu-container {
+  position: fixed;
+  top: 70px;
+  left: 50px;
+  width: 200px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.left-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.left-menu li {
+  position: relative;
+  padding: 0;
+}
+
+.left-menu li a {
+  display: block;
+  padding: 10px;
+  color: #000;
+  text-decoration: none;
+  background-color: #fff;
+}
+
+.left-menu li a:hover {
+  background-color: #e5e5e5;
+}
+
+.left-menu li a:active {
+  background-color: purple;
+  color: #fff;
+}
+
+.left-menu li ul {
+  display: none;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.left-menu li:hover ul {
+  display: block;
+}
+
+.left-menu li ul li {
+  display: block;
+  padding: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* or whatever you prefer */
+    background-color: #fff; /* Added this line */
+    margin-top: 20px;
+    margin-left: 300px; /* adjust this value according to your layout */
+    margin-right: 300px;
+}
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dot.mapper.admin.ContentMapper">
+    <select id="findAll" resultType="com.dot.domain.admin.Content">
+        SELECT
+            content_id AS contentId,
+            menu_id AS menuId,
+            content_name AS contentName,
+            content_type AS contentType,
+            content_text AS contentText,
+            content_file AS contentFile,
+            display_status AS displayStatus,
+            remarks,
+            created_date AS createdDate,
+            modified_date AS modifiedDate
+        FROM tb_content
+    </select>
+    <select id="findById" resultType="com.dot.domain.admin.Content">
+        SELECT * FROM tb_content WHERE content_id = #{id}
+    </select>
+
+    <insert id="add" parameterType="com.dot.domain.admin.Content">
+        INSERT INTO public.tb_content (menu_id, content_name, content_type, content_text, display_status, remarks)
+        VALUES (#{menuId}, #{contentName}, #{contentType}, #{contentText}, #{displayStatus}, #{remarks})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM public.tb_content WHERE content_id = #{contentId}
+    </delete>
+
+    <update id="update" parameterType="com.dot.domain.admin.Content">
+        UPDATE public.tb_content
+        SET menu_id = #{menuId}, content_name = #{contentName}, content_type = #{contentType},
+        content_text = #{contentText}, display_status = #{displayStatus}, remarks = #{remarks},
+        modified_date = CURRENT_TIMESTAMP
+        WHERE content_id = #{contentId}
+    </update>
+</mapper>
